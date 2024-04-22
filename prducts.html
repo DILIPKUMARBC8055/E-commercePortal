@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        /* Add some basic styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Product List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="tableData"></tbody>
+    </table>
+
+    <script>
+        // Define the authorization token
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE3MTMxNzE0NDksImV4cCI6MTcxMzE3NTA0OX0.6_u-Q5UDlRpdp8bve7Uac8ZhzUXr_lGlLk_Phfj_Jbw";
+
+        // Fetch data from the API
+        fetch("http://localhost:8080/api/product", {
+            headers: {
+                'Authorization': `${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                // Check for successful response
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                // Parse the JSON response
+                return response.json();
+            })
+            .then(data => {
+                // Get reference to the table body
+                const tableBody = document.getElementById("tableData");
+                // Clear the existing table data
+                tableBody.innerHTML = "";
+                
+                // Populate the table with data
+                data.forEach(product => {
+                    const row = document.createElement("tr");
+
+                    // Create cells for ID, name, and price
+                    const productId = document.createElement("td");
+                    productId.textContent = product.id;
+                    row.appendChild(productId);
+
+                    const productName = document.createElement("td");
+                    productName.textContent = product.name;
+                    row.appendChild(productName);
+
+                    const productPrice = document.createElement("td");
+                    productPrice.textContent = `$${product.price.toFixed(2)}`;
+                    row.appendChild(productPrice);
+
+                    // Append the row to the table body
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error("Fetch error:", error);
+            });
+    </script>
+</body>
+
+</html>
