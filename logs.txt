@@ -112,3 +112,5 @@
 {"level":"info","message":"/api/like?id=662418e821a50c4c71bf64f2&type=%22product%22- {}","service":"logging data"}
 {"level":"info","message":"/api/like?id=662418e821a50c4c71bf64f2&type=%22product%22- {}","service":"logging data"}
 {"level":"info","message":"/api/user/signup- {\"name\":\"dilip\",\"email\":\"dilipkumarbc@gmail.com\",\"password\":\"1234\",\"type\":\"Seller\"}","service":"logging data"}
+{"level":"info","message":"/- {}","service":"logging data"}
+{"level":"info","message":"/favicon.ico- {}","service":"logging data"}

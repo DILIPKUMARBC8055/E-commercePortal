@@ -13,5 +13,6 @@ const jwtAuth = (req, res, next) => {
     return res.status(401).send("unauthorized");
   }
   next();
+  
 };
 export default jwtAuth;
